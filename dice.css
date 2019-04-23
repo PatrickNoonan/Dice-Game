@@ -3,6 +3,7 @@ html {
     width: 100%
   }
 body {
+    background-color: antiquewhite
     max-height: 100%;
     max-width: 100%;
   }
@@ -59,5 +60,17 @@ body {
 }
 
 .menu-row {
+    position: absolute;
     bottom: 0px;
 }
+
+.stickFigures {
+}
+
+.stickOne {
+}
+
+.stickTwo {
+    transform: rotateY(180deg);
+}
+

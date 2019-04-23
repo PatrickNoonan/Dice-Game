@@ -103,41 +103,41 @@ function chooseArmor(player, diceSides) {
     if (player == "P1") {
         if (rolledArmorResult <= 10) {
             document.getElementById("displayArmorValueP1").innerHTML = "Your armor is cloth, you start with 0 hp advantage";
-            armorResultP1 = 0;
+            playerOneObject.Armor = 0;
         } else if (rolledArmorResult > 10 && rolledArmorResult <= 20) {
             document.getElementById("displayArmorValueP1").innerHTML = "Your armor is leather, you start with 10 hp advantage";
-            armorResultP1 = 10;
+            playerOneObject.Armor = 10;
         } else if (rolledArmorResult > 20 && rolledArmorResult <= 30) {
             document.getElementById("displayArmorValueP1").innerHTML = "Your armor is mail, you start with 20 hp advantage";
-            armorResultP1 = 20;
+            playerOneObject.Armor = 20;
         } else if (rolledArmorResult > 30) {
             document.getElementById("displayArmorValueP1").innerHTML = "Your armor is plate, you start with 30 hp advantage";
-            armorResultP1 = 30;
+            playerOneObject.Armor = 30;
         } else {
-            armorResultP1 = "Something went wrong"
+            playerOneObject.Armor = "Something went wrong"
         }
     } else if (player == "P2") {
         if (rolledArmorResult <= 10) {
             document.getElementById("displayArmorValueP2").innerHTML = "Your armor is cloth, you start with 0 hp advantage";
-            armorResultP2 = 0;
+            playerTwoObject.Armor = 0;
         } else if (rolledArmorResult > 10 && rolledArmorResult <= 20) {
             document.getElementById("displayArmorValueP2").innerHTML = "Your armor is leather, you start with 10 hp advantage";
-            armorResultP2 = 10;
+            playerTwoObject.Armor = 10;
         } else if (rolledArmorResult > 20 && rolledArmorResult <= 30) {
             document.getElementById("displayArmorValueP2").innerHTML = "Your armor is mail, you start with 20 hp advantage";
-            armorResultP2 = 20;
+            playerTwoObject.Armor = 20;
         } else if (rolledArmorResult > 30) {
             document.getElementById("displayArmorValueP2").innerHTML = "Your armor is plate, you start with 30 hp advantage";
-            armorResultP2 = 30;
+            playerTwoObject.Armor = 30;
         } else {
-            armorResultP2 = "Something went wrong"
+            playerTwoObject.Armor = "Something went wrong"
         }
     }
 
     if (player == "P1") {
-        return hpInformation("P1", armorResultP1);
+        return hpInformation("P1", playerOneObject.Armor);
     } else if (player == "P2") {
-        return hpInformation("P2", armorResultP2);
+        return hpInformation("P2", playerTwoObject.Armor);
     }
 }
 
@@ -193,7 +193,7 @@ function chooseWeapon(player, diceSides) {
 function atkFunction(player, diceSides) {
     let atkDamage;
 
-    if (playerOneObject.Weapon !== "tbd" && playerTwoObject.Weapon !== "tbd") {
+    if (playerOneObject.Weapon !== "tbd" && playerTwoObject.Weapon !== "tbd" && playerOneObject.Armor !== "tbd" && playerTwoObject.Armor !== "tbd") {
         if (player == "P1" && playerOneObject.turnCount) {
             atkDamage = playerOneObject.Weapon + rollTheDice(diceSides);
             document.getElementById("displayAttackP1").innerHTML = "P1 dealt " + atkDamage + " damage to P2";
@@ -209,7 +209,7 @@ function atkFunction(player, diceSides) {
                 playerOneObject.winCount += 1;
                 document.getElementById("winCountP1").innerHTML = "P1 has " + playerOneObject.winCount + " wins";
                 document.getElementById("gameOverP1").innerHTML = "P2 has been defeated, P1 wins!";
-                restartGame = prompt("Would you like to play again? Y or N");
+                restartGame = prompt("P1 has dealt a killing blow of " + atkDamage + " to P2!\nWould you like to play again? (Y or N)");
                 resetGame();
             }
         } else if (player == "P2" && playerTwoObject.turnCount) {
@@ -227,7 +227,7 @@ function atkFunction(player, diceSides) {
                 playerTwoObject.winCount += 1;
                 document.getElementById("winCountP2").innerHTML = "P2 has " + playerTwoObject.winCount + " wins";
                 document.getElementById("gameOverP2").innerHTML = "P1 has been defeated, P2 wins!";
-                restartGame = prompt("Would you like to play again? Y or N");
+                restartGame = prompt("P2 has dealt a killing blow of " + atkDamage + " to P1!\nWould you like to play again? (Y or N)");
                 resetGame();
             }
         } else {
@@ -242,10 +242,18 @@ function atkFunction(player, diceSides) {
 function resetGame() {
     playerOneObject.startHP = 100;
     playerOneObject.HP = 100;
+    playerOneObject.Weapon = 0;
+    playerOneObject.percentHP = 100;
+
     playerTwoObject.startHP = 100;
     playerTwoObject.HP = 100;
-    playerOneObject.Weapon = 0;
     playerTwoObject.Weapon = 0;
+    playerTwoObject.percentHP = 100;
+    
+    document.getElementById("p1CurrentHP").style.width = playerOneObject.percentHP + "%";
+    document.getElementById("p1CurrentPercent").style.width = playerOneObject.percentHP + "%";
+    document.getElementById("p2CurrentHP").style.width = playerTwoObject.percentHP + "%";
+    document.getElementById("p2CurrentPercent").style.width = playerTwoObject.percentHP + "%";
 
     document.getElementById("p1CurrentPercent").innerHTML = playerOneObject.startHP + "%";
     document.getElementById("p2CurrentPercent").innerHTML = playerTwoObject.startHP + "%";
@@ -268,7 +276,7 @@ function resetGame() {
 }
 
 function showInfo() {
-    alert("Welcome to my fighting game! \nEach player much first choose their armor and weapons before they take turns attacking one another. \nChoosing a lower level dice roll guaratees at least a moderate amount of damage but also guarantees that you won't do a significant amount of damage. \nThe higher dice sides used to roll, the more maximum damage you could possibly inflict, but also you may inflict as low as 0 damage (at 20 sides).");
+    alert("Welcome to my fighting game! \nEach player much first choose their armor and weapons before they take turns attacking one another. \nChoosing a lower level dice roll guaratees at least a moderate amount of damage but also guarantees that you won't do a significant amount of damage. \nThe higher dice sides used to roll, the more maximum damage you could possibly inflict, but also you may inflict as low as 0 damage (at 20 sides).\n Loser of the last round start first");
 }
 
 
