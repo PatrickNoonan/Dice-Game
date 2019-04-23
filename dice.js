@@ -1,13 +1,3 @@
-//let playerOneStartHP;
-let playerOneHP;
-let playerTwoStartHP;
-let playerTwoHP;
-let weaponResultP1;
-let weaponResultP2;
-
-let p1WinCount = 0;
-let p2WinCount = 0;
-
 let playerOneObject = {
     startHP: 100,
     HP: 100,
@@ -81,24 +71,24 @@ function hpInformation(player, armorResult) {
             document.getElementById("p1CurrentPercent").innerHTML = playerOnePercentHP + "%";
         }
         document.getElementById("p1CurrentHP").innerHTML = playerOneCurrentHP + "/" + playerOneObject.startHP;
-        playerOneHP = playerOneObject.startHP
+        playerOneObject.HP = playerOneObject.startHP
         return playerOneObject.startHP;
     }
 
     if (player == "P2") {
-        playerTwoStartHP = 100 + armorResult;
-        let playerTwoCurrentHP = playerTwoStartHP;
+        playerTwoObject.startHP = 100 + armorResult;
+        let playerTwoCurrentHP = playerTwoObject.startHP;
         let playerTwoPercentHP;
         if (playerTwoCurrentHP < 100) {
-            playerTwoPercentHP = (playerTwoCurrentHP / playerTwoStartHP) * 100;
+            playerTwoPercentHP = (playerTwoCurrentHP / playerTwoObject.startHP) * 100;
             document.getElementById("p2CurrentPercent").innerHTML = playerTwoPercentHP + "%";
         } else {
             playerTwoPercentHP = 100;
             document.getElementById("p2CurrentPercent").innerHTML = playerTwoPercentHP + "%";
         }
-        document.getElementById("p2CurrentHP").innerHTML = playerTwoCurrentHP + "/" + playerTwoStartHP;
-        playerTwoHP = playerTwoStartHP;
-        return playerTwoStartHP;
+        document.getElementById("p2CurrentHP").innerHTML = playerTwoCurrentHP + "/" + playerTwoObject.startHP;
+        playerTwoObject.HP = playerTwoObject.startHP;
+        return playerTwoObject.startHP;
     }
 
 }
@@ -155,44 +145,44 @@ function chooseWeapon(player, diceSides) {
         if (rolledWeaponResult <= 10) {
             document.getElementById("displayWeaponValueP1").innerHTML = "Your weapon is a stick, you start with 0 attack power advantage";
             document.getElementById("p1StartAD").innerHTML = "Stick - 0 AD";
-            weaponResultP1 = 0;
+            playerOneObject.Weapon = 0;
         } else if (rolledWeaponResult > 10 && rolledWeaponResult <= 20) {
             document.getElementById("displayWeaponValueP1").innerHTML = "Your weapon is a knife, you start with 10 attack power advantage";
             document.getElementById("p1StartAD").innerHTML = "Knife - 10 AD";
-            weaponResultP1 = 10;
+            playerOneObject.Weapon = 10;
         } else if (rolledWeaponResult > 20 && rolledWeaponResult <= 30) {
             document.getElementById("displayWeaponValueP1").innerHTML = "Your weapon is sword, you start with 20 attack power advantage";
             document.getElementById("p1StartAD").innerHTML = "Sword - 20 AD";
-            weaponResultP1 = 20;
+            playerOneObject.Weapon = 20;
         } else if (rolledWeaponResult > 30) {
             document.getElementById("displayWeaponValueP1").innerHTML = "Your weapon is excalibur, you start with 30 attack power advantage";
             document.getElementById("p1StartAD").innerHTML = "Excalibur - 30 AD";
-            weaponResultP1 = 30;
+            playerOneObject.Weapon = 30;
         } else {
-            weaponResultP1 = "Something went wrong"
+            playerOneObject.Weapon = "Something went wrong"
         }
-        return weaponResultP1;
+        return playerOneObject.Weapon;
     } else if (player == "P2") {
         if (rolledWeaponResult <= 10) {
             document.getElementById("displayWeaponValueP2").innerHTML = "Your weapon is a stick, you start with 0 attack power advantage";
             document.getElementById("p2StartAD").innerHTML = "Stick - 0 AD";
-            weaponResultP2 = 0;
+            playerTwoObject.Weapon = 0;
         } else if (rolledWeaponResult > 10 && rolledWeaponResult <= 20) {
             document.getElementById("displayWeaponValueP2").innerHTML = "Your weapon is a knife, you start with 10 attack power advantage";
             document.getElementById("p2StartAD").innerHTML = "Knife - 10 AD";
-            weaponResultP2 = 10;
+            playerTwoObject.Weapon = 10;
         } else if (rolledWeaponResult > 20 && rolledWeaponResult <= 30) {
             document.getElementById("displayWeaponValueP2").innerHTML = "Your weapon is sword, you start with 20 attack power advantage";
             document.getElementById("p2StartAD").innerHTML = "Sword - 20 AD";
-            weaponResultP2 = 20;
+            playerTwoObject.Weapon = 20;
         } else if (rolledWeaponResult > 30) {
             document.getElementById("displayWeaponValueP2").innerHTML = "Your weapon is excalibur, you start with 30 attack power advantage";
             document.getElementById("p2StartAD").innerHTML = "Excalibur - 30 AD";
-            weaponResultP2 = 30;
+            playerTwoObject.Weapon = 30;
         } else {
-            weaponResultP2 = "Something went wrong"
+            playerTwoObject.Weapon = "Something went wrong"
         }
-        return weaponResultP2;
+        return playerTwoObject.Weapon;
     }
 }
 
@@ -201,13 +191,13 @@ function atkFunction(player, diceSides) {
     let atkDamage;
 
     if (player == "P1") {
-        atkDamage = weaponResultP1 + rollTheDice(diceSides);
+        atkDamage = playerOneObject.Weapon + rollTheDice(diceSides);
         document.getElementById("displayAttackP1").innerHTML = "P1 dealt " + atkDamage + " damage to P2";
-        playerTwoHP -= atkDamage;
-        document.getElementById("p2CurrentHP").innerHTML = playerTwoHP + "/" + playerTwoStartHP;
-        if (playerTwoHP < 1) {
-            p1WinCount += 1;
-            document.getElementById("winCountP1").innerHTML = "P1 has " + p1WinCount + " wins";
+        playerTwoObject.HP -= atkDamage;
+        document.getElementById("p2CurrentHP").innerHTML = playerTwoObject.HP + "/" + playerTwoObject.startHP;
+        if (playerTwoObject.HP < 1) {
+            playerOneObject.winCount += 1;
+            document.getElementById("winCountP1").innerHTML = "P1 has " + playerOneObject.winCount + " wins";
             document.getElementById("gameOverP1").innerHTML = "P2 has been defeated, P1 wins!";
             restartGame = prompt("Would you like to play again? Y or N");
             resetGame();
@@ -215,13 +205,13 @@ function atkFunction(player, diceSides) {
     }
 
     if (player == "P2") {
-        atkDamage = weaponResultP2 + rollTheDice(diceSides);
+        atkDamage = playerTwoObject.Weapon + rollTheDice(diceSides);
         document.getElementById("displayAttackP2").innerHTML = "P2 dealt " + atkDamage + " damage to P1";
-        playerOneHP -= atkDamage;
-        document.getElementById("p1CurrentHP").innerHTML = playerOneHP + "/" + playerOneObject.startHP;
-        if (playerOneHP < 1) {
-            p2WinCount += 1;
-            document.getElementById("winCountP2").innerHTML = "P2 has " + p2WinCount + " wins";
+        playerOneObject.HP -= atkDamage;
+        document.getElementById("p1CurrentHP").innerHTML = playerOneObject.HP + "/" + playerOneObject.startHP;
+        if (playerOneObject.HP < 1) {
+            playerTwoObject.winCount += 1;
+            document.getElementById("winCountP2").innerHTML = "P2 has " + playerTwoObject.winCount + " wins";
             document.getElementById("gameOverP2").innerHTML = "P1 has been defeated, P2 wins!";
             restartGame = prompt("Would you like to play again? Y or N");
             resetGame();
@@ -232,17 +222,17 @@ function atkFunction(player, diceSides) {
 
 function resetGame() {
     playerOneObject.startHP = 100;
-    playerOneHP = 100;
-    playerTwoStartHP = 100;
-    playerTwoHP = 100;
-    weaponResultP1 = 0;
-    weaponResultP2 = 0;
+    playerOneObject.HP = 100;
+    playerTwoObject.startHP = 100;
+    playerTwoObject.HP = 100;
+    playerOneObject.Weapon = 0;
+    playerTwoObject.Weapon = 0;
 
     document.getElementById("p1CurrentPercent").innerHTML = playerOneObject.startHP + "%";
-    document.getElementById("p2CurrentPercent").innerHTML = playerTwoStartHP + "%";
+    document.getElementById("p2CurrentPercent").innerHTML = playerTwoObject.startHP + "%";
 
     document.getElementById("p1CurrentHP").innerHTML = playerOneObject.startHP + "/" + playerOneObject.startHP;
-    document.getElementById("p2CurrentHP").innerHTML = playerTwoStartHP + "/" + playerTwoStartHP;
+    document.getElementById("p2CurrentHP").innerHTML = playerTwoObject.startHP + "/" + playerTwoObject.startHP;
 
     document.getElementById("displayArmorValueP1").innerHTML = "?";
     document.getElementById("displayArmorValueP2").innerHTML = "?";
