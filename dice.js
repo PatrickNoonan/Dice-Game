@@ -1,3 +1,20 @@
+let playerOneStartHP;
+let playerOneHP;
+let playerTwoStartHP;
+let playerTwoHP;
+
+let weaponResultP1;
+let weaponResultP2;
+
+function statTracker() {
+    
+}
+    
+setInterval(statTracker, 5000);
+
+
+
+
 function rollTheDice(diceSides) {
     let min;
     let max;
@@ -45,7 +62,7 @@ function rollTheDice(diceSides) {
 function hpInformation(player, armorResult) {
 
     if (player == "P1") {
-        let playerOneStartHP = 100 + armorResult;
+        playerOneStartHP = 100 + armorResult;
         let playerOneCurrentHP = playerOneStartHP;
         let playerOnePercentHP;
         if (playerOneCurrentHP < 100) {
@@ -57,10 +74,12 @@ function hpInformation(player, armorResult) {
             document.getElementById("p1CurrentPercent").innerHTML = playerOnePercentHP + "%";
         }
         document.getElementById("p1CurrentHP").innerHTML = playerOneCurrentHP + "/" + playerOneStartHP;
+        playerOneHP = playerOneStartHP
+        return playerOneStartHP;
     }
 
     if (player == "P2") {
-        let playerTwoStartHP = 100 + armorResult;
+        playerTwoStartHP = 100 + armorResult;
         let playerTwoCurrentHP = playerTwoStartHP;
         let playerTwoPercentHP;
         if (playerTwoCurrentHP < 100) {
@@ -71,21 +90,14 @@ function hpInformation(player, armorResult) {
             document.getElementById("p2CurrentPercent").innerHTML = playerTwoPercentHP + "%";
         }
         document.getElementById("p2CurrentHP").innerHTML = playerTwoCurrentHP + "/" + playerTwoStartHP;
+        playerTwoHP = playerTwoStartHP;
+        return playerTwoStartHP;
     }
 
 }
 
-function atkInformation(weapon) {
-    let weaponResultP1;
-    let weaponResultP2;
-}
-
-
-
 function chooseArmor(player, diceSides) {
     let rolledArmorResult = rollTheDice(diceSides);
-    let armorResultP1;
-    let armorResultP2;
 
     if (player == "P1") {
         if (rolledArmorResult <= 10) {
@@ -135,36 +147,76 @@ function chooseWeapon(player, diceSides) {
     if (player == "P1") {
         if (rolledWeaponResult <= 10) {
             document.getElementById("displayWeaponValueP1").innerHTML = "Your weapon is a stick, you start with 0 attack power advantage";
+            document.getElementById("p1StartAD").innerHTML = "0 AD";
             weaponResultP1 = 0;
         } else if (rolledWeaponResult > 10 && rolledWeaponResult <= 25) {
             document.getElementById("displayWeaponValueP1").innerHTML = "Your weapon is a knife, you start with 10 attack power advantage";
+            document.getElementById("p1StartAD").innerHTML = "10 AD";
             weaponResultP1 = 10;
         } else if (rolledWeaponResult > 25 && rolledWeaponResult <= 50) {
             document.getElementById("displayWeaponValueP1").innerHTML = "Your weapon is sword, you start with 20 attack power advantage";
+            document.getElementById("p1StartAD").innerHTML = "20 AD";
             weaponResultP1 = 20;
         } else if (rolledWeaponResult > 50) {
             document.getElementById("displayWeaponValueP1").innerHTML = "Your weapon is excalibur, you start with 30 attack power advantage";
+            document.getElementById("p1StartAD").innerHTML = "30 AD";
             weaponResultP1 = 30;
         } else {
-            armorResult = "Something went wrong"
+            weaponResultP1 = "Something went wrong"
         }
-    } else if (player == "P2") {
+        return weaponResultP1;
+    }  else if (player == "P2") {
         if (rolledWeaponResult <= 10) {
             document.getElementById("displayWeaponValueP2").innerHTML = "Your weapon is a stick, you start with 0 attack power advantage";
+            document.getElementById("p2StartAD").innerHTML = "0 AD";
             weaponResultP2 = 0;
         } else if (rolledWeaponResult > 10 && rolledWeaponResult <= 25) {
             document.getElementById("displayWeaponValueP2").innerHTML = "Your weapon is a knife, you start with 10 attack power advantage";
+            document.getElementById("p2StartAD").innerHTML = "10 AD";
             weaponResultP2 = 10;
         } else if (rolledWeaponResult > 25 && rolledWeaponResult <= 50) {
             document.getElementById("displayWeaponValueP2").innerHTML = "Your weapon is sword, you start with 20 attack power advantage";
+            document.getElementById("p2StartAD").innerHTML = "20 AD";
             weaponResultP2 = 20;
         } else if (rolledWeaponResult > 50) {
             document.getElementById("displayWeaponValueP2").innerHTML = "Your weapon is excalibur, you start with 30 attack power advantage";
+            document.getElementById("p2StartAD").innerHTML = "30 AD";
             weaponResultP2 = 30;
         } else {
-            armorResult = "Something went wrong"
+            weaponResultP2 = "Something went wrong"
+        }
+        return weaponResultP2;
+    }
+}
+
+function atkFunction(player, diceSides) {
+    let atkDamage;
+
+    if (player == "P1") {
+        atkDamage = weaponResultP1 + rollTheDice(diceSides);
+        document.getElementById("displayAttackP1").innerHTML = "P1 dealt " + atkDamage + " damage to P2";
+        playerTwoHP -= atkDamage;
+        document.getElementById("p2CurrentHP").innerHTML = playerTwoHP + "/" + playerTwoStartHP;
+        if (playerTwoHP < 1){
+            document.getElementById("gameOverP1").innerHTML = "P2 has been defeated, P1 wins!";
         }
     }
+
+    if (player == "P2") {
+        atkDamage = weaponResultP2 + rollTheDice(diceSides);
+        document.getElementById("displayAttackP2").innerHTML = "P2 dealt " + atkDamage + " damage to P1";
+        playerOneHP -= atkDamage;
+        document.getElementById("p1CurrentHP").innerHTML = playerOneHP + "/" + playerOneStartHP;
+        if (playerOneHP < 1){
+            document.getElementById("gameOverP2").innerHTML = "P1 has been defeated, P2 wins!";
+        }
+    }
+
+    return atkDamage;    
+}
+
+function playAgain(){
+    
 }
 
 
