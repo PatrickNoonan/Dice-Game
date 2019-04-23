@@ -2,18 +2,11 @@ let playerOneStartHP;
 let playerOneHP;
 let playerTwoStartHP;
 let playerTwoHP;
-
 let weaponResultP1;
 let weaponResultP2;
 
-function statTracker() {
-    
-}
-    
-setInterval(statTracker, 5000);
-
-
-
+let p1WinCount = 0;
+let p2WinCount = 0;
 
 function rollTheDice(diceSides) {
     let min;
@@ -165,7 +158,7 @@ function chooseWeapon(player, diceSides) {
             weaponResultP1 = "Something went wrong"
         }
         return weaponResultP1;
-    }  else if (player == "P2") {
+    } else if (player == "P2") {
         if (rolledWeaponResult <= 10) {
             document.getElementById("displayWeaponValueP2").innerHTML = "Your weapon is a stick, you start with 0 attack power advantage";
             document.getElementById("p2StartAD").innerHTML = "0 AD";
@@ -190,6 +183,7 @@ function chooseWeapon(player, diceSides) {
 }
 
 function atkFunction(player, diceSides) {
+    let restartGame;
     let atkDamage;
 
     if (player == "P1") {
@@ -197,8 +191,12 @@ function atkFunction(player, diceSides) {
         document.getElementById("displayAttackP1").innerHTML = "P1 dealt " + atkDamage + " damage to P2";
         playerTwoHP -= atkDamage;
         document.getElementById("p2CurrentHP").innerHTML = playerTwoHP + "/" + playerTwoStartHP;
-        if (playerTwoHP < 1){
+        if (playerTwoHP < 1) {
+            p1WinCount += 1;
+            document.getElementById("winCountP1").innerHTML = "P1 has " + p1WinCount + " wins";
             document.getElementById("gameOverP1").innerHTML = "P2 has been defeated, P1 wins!";
+            restartGame = prompt("Would you like to play again? Y or N");
+            resetGame();
         }
     }
 
@@ -207,16 +205,45 @@ function atkFunction(player, diceSides) {
         document.getElementById("displayAttackP2").innerHTML = "P2 dealt " + atkDamage + " damage to P1";
         playerOneHP -= atkDamage;
         document.getElementById("p1CurrentHP").innerHTML = playerOneHP + "/" + playerOneStartHP;
-        if (playerOneHP < 1){
+        if (playerOneHP < 1) {
+            p2WinCount += 1;
+            document.getElementById("winCountP2").innerHTML = "P2 has " + p2WinCount + " wins";
             document.getElementById("gameOverP2").innerHTML = "P1 has been defeated, P2 wins!";
+            restartGame = prompt("Would you like to play again? Y or N");
+            resetGame();
         }
     }
 
-    return atkDamage;    
 }
 
-function playAgain(){
-    
+function resetGame() {
+    playerOneStartHP = 100;
+    playerOneHP = 100;
+    playerTwoStartHP = 100;
+    playerTwoHP = 100;
+    weaponResultP1 = 0;
+    weaponResultP2 = 0;
+
+    document.getElementById("p1CurrentPercent").innerHTML = playerOneStartHP + "%";
+    document.getElementById("p2CurrentPercent").innerHTML = playerTwoStartHP + "%";
+
+    document.getElementById("p1CurrentHP").innerHTML = playerOneStartHP + "/" + playerOneStartHP;
+    document.getElementById("p2CurrentHP").innerHTML = playerTwoStartHP + "/" + playerTwoStartHP;
+
+    document.getElementById("displayArmorValueP1").innerHTML = "?";
+    document.getElementById("displayArmorValueP2").innerHTML = "?";
+
+    document.getElementById("displayWeaponValueP1").innerHTML = "?";
+    document.getElementById("p1StartAD").innerHTML = "0 AD";
+    document.getElementById("displayWeaponValueP2").innerHTML = "?";
+    document.getElementById("p2StartAD").innerHTML = "0 AD";
+
+    document.getElementById("displayAttackP1").innerHTML = "";
+    document.getElementById("gameOverP1").innerHTML = "";
+    document.getElementById("displayAttackP2").innerHTML = "";
+    document.getElementById("gameOverP2").innerHTML = "";
+
+
 }
 
 

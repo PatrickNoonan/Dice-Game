@@ -24,22 +24,29 @@
                 </div>
                 <div class="atkPower">
                     <div id="p1StartAD">
-                        0
+                        0 Bonus AD
                     </div>
                 </div>
             </div>
 
 
             <br>
+            <br>
             <p>Choose your armor</p>
             <br>
 
-            <button type="button" onclick="chooseArmor('P1', 4)">Pick from armor pile 1</button>
-            <button type="button" onclick="chooseArmor('P1', 6)">Pick from armor pile 2</button>
-            <button type="button" onclick="chooseArmor('P1', 8)">Pick from armor pile 3</button>
-            <button type="button" onclick="chooseArmor('P1', 10)">Pick from armor pile 4</button>
-            <button type="button" onclick="chooseArmor('P1', 12)">Pick from armor pile 5</button>
-            <button type="button" onclick="chooseArmor('P1', 20)">Pick from armor pile 6</button>
+            <button class="armorButton btn-default btn-sm" type="button" onclick="chooseArmor('P1', 4)">Pick from armor
+                pile 1</button>
+            <button class="armorButton btn-default btn-sm" type="button" onclick="chooseArmor('P1', 6)">Pick from armor
+                pile 2</button>
+            <button class="armorButton btn-default btn-sm" type="button" onclick="chooseArmor('P1', 8)">Pick from armor
+                pile 3</button>
+            <button class="armorButton btn-default btn-sm" type="button" onclick="chooseArmor('P1', 10)">Pick from armor
+                pile 4</button>
+            <button class="armorButton btn-default btn-sm" type="button" onclick="chooseArmor('P1', 12)">Pick from armor
+                pile 5</button>
+            <button class="armorButton btn-default btn-sm" type="button" onclick="chooseArmor('P1', 20)">Pick from armor
+                pile 6</button>
 
 
             <p id="displayArmorValueP1">?</p>
@@ -47,12 +54,18 @@
 
             <p>Choose your weapon</p>
             <br>
-            <button type="button" onclick="chooseWeapon('P1', 4)">Pick from weapon pile 1</button>
-            <button type="button" onclick="chooseWeapon('P1', 6)">Pick from weapon pile 2</button>
-            <button type="button" onclick="chooseWeapon('P1', 8)">Pick from weapon pile 3</button>
-            <button type="button" onclick="chooseWeapon('P1', 10)">Pick from weapon pile 4</button>
-            <button type="button" onclick="chooseWeapon('P1', 12)">Pick from weapon pile 5</button>
-            <button type="button" onclick="chooseWeapon('P1', 20)">Pick from weapon pile 6</button>
+            <button class="weaponButton btn-default btn-sm" type="button" onclick="chooseWeapon('P1', 4)">Pick from
+                weapon pile 1</button>
+            <button class="weaponButton btn-default btn-sm" type="button" onclick="chooseWeapon('P1', 6)">Pick from
+                weapon pile 2</button>
+            <button class="weaponButton btn-default btn-sm" type="button" onclick="chooseWeapon('P1', 8)">Pick from
+                weapon pile 3</button>
+            <button class="weaponButton btn-default btn-sm" type="button" onclick="chooseWeapon('P1', 10)">Pick from
+                weapon pile 4</button>
+            <button class="weaponButton btn-default btn-sm" type="button" onclick="chooseWeapon('P1', 12)">Pick from
+                weapon pile 5</button>
+            <button class="weaponButton btn-default btn-sm" type="button" onclick="chooseWeapon('P1', 20)">Pick from
+                weapon pile 6</button>
 
 
             <p id="displayWeaponValueP1">?</p>
@@ -62,23 +75,27 @@
                 <p>Choose your attack</p>
                 <br>
 
-                <button type="button" onclick="atkFunction('P1', 4)">4 sided dice. 13-17 dmg</button>
-                <button type="button" onclick="atkFunction('P1', 6)">6 sided dice. 12-20 dmg</button>
-                <button type="button" onclick="atkFunction('P1', 8)">8 sided dice. 11-25 dmg</button>
-                <button type="button" onclick="atkFunction('P1', 10)">10 sided dice. 10-30 dmg</button>
-                <button type="button" onclick="atkFunction('P1', 12)">12 sided dice. 8-40 dmg</button>
-                <button type="button" onclick="atkFunction('P1', 20)">20 sided dice. 0-75 dmg</button>
+                <button class="atkButton btn-default btn-sm" type="button" onclick="atkFunction('P1', 4)">4 sided dice.
+                    13-17 dmg</button>
+                <button class="atkButton btn-default btn-sm" type="button" onclick="atkFunction('P1', 6)">6 sided dice.
+                    12-20 dmg</button>
+                <button class="atkButton btn-default btn-sm" type="button" onclick="atkFunction('P1', 8)">8 sided dice.
+                    11-25 dmg</button>
+                <button class="atkButton btn-default btn-sm" type="button" onclick="atkFunction('P1', 10)">10 sided
+                    dice. 10-30 dmg</button>
+                <button class="atkButton btn-default btn-sm" type="button" onclick="atkFunction('P1', 12)">12 sided
+                    dice. 8-40 dmg</button>
+                <button class="atkButton btn-default btn-sm" type="button" onclick="atkFunction('P1', 20)">20 sided
+                    dice. 0-75 dmg</button>
             </div>
             <p id="displayAttackP1">?</p>
             <br>
 
             <h3 id="gameOverP1"></h3>
 
+            <h2 id="winCountP1"></h2>
+
         </div>
-
-
-
-
 
         <div class="col-6 text-center">
             <h3>Fighter 2</h3>
@@ -91,21 +108,29 @@
                     100/100
                 </div>
                 <div class="atkPower">
-                        <div id="p2StartAD">
-                            0
-                        </div>
+                    <div id="p2StartAD">
+                        0 Bonus AD
                     </div>
+                </div>
             </div>
+
+            <br>
             <br>
             <p>Choose your armor</p>
             <br>
 
-            <button type="button" onclick="chooseArmor('P2', 4)">Pick from armor pile 1</button>
-            <button type="button" onclick="chooseArmor('P2', 6)">Pick from armor pile 2</button>
-            <button type="button" onclick="chooseArmor('P2', 8)">Pick from armor pile 3</button>
-            <button type="button" onclick="chooseArmor('P2', 10)">Pick from armor pile 4</button>
-            <button type="button" onclick="chooseArmor('P2', 12)">Pick from armor pile 5</button>
-            <button type="button" onclick="chooseArmor('P2', 20)">Pick from armor pile 6</button>
+            <button class="armorButton btn-default btn-sm" type="button" onclick="chooseArmor('P2', 4)">Pick from armor
+                pile 1</button>
+            <button class="armorButton btn-default btn-sm" type="button" onclick="chooseArmor('P2', 6)">Pick from armor
+                pile 2</button>
+            <button class="armorButton btn-default btn-sm" type="button" onclick="chooseArmor('P2', 8)">Pick from armor
+                pile 3</button>
+            <button class="armorButton btn-default btn-sm" type="button" onclick="chooseArmor('P2', 10)">Pick from armor
+                pile 4</button>
+            <button class="armorButton btn-default btn-sm" type="button" onclick="chooseArmor('P2', 12)">Pick from armor
+                pile 5</button>
+            <button class="armorButton btn-default btn-sm" type="button" onclick="chooseArmor('P2', 20)">Pick from armor
+                pile 6</button>
 
             <p id="displayArmorValueP2">?</p>
             <br>
@@ -113,12 +138,18 @@
             <p>Choose your weapon</p>
             <br>
 
-            <button type="button" onclick="chooseWeapon('P2', 4)">Pick from weapon pile 1</button>
-            <button type="button" onclick="chooseWeapon('P2', 6)">Pick from weapon pile 2</button>
-            <button type="button" onclick="chooseWeapon('P2', 8)">Pick from weapon pile 3</button>
-            <button type="button" onclick="chooseWeapon('P2', 10)">Pick from weapon pile 4</button>
-            <button type="button" onclick="chooseWeapon('P2', 12)">Pick from weapon pile 5</button>
-            <button type="button" onclick="chooseWeapon('P2', 20)">Pick from weapon pile 6</button>
+            <button class="weaponButton btn-default btn-sm" type="button" onclick="chooseWeapon('P2', 4)">Pick from
+                weapon pile 1</button>
+            <button class="weaponButton btn-default btn-sm" type="button" onclick="chooseWeapon('P2', 6)">Pick from
+                weapon pile 2</button>
+            <button class="weaponButton btn-default btn-sm" type="button" onclick="chooseWeapon('P2', 8)">Pick from
+                weapon pile 3</button>
+            <button class="weaponButton btn-default btn-sm" type="button" onclick="chooseWeapon('P2', 10)">Pick from
+                weapon pile 4</button>
+            <button class="weaponButton btn-default btn-sm" type="button" onclick="chooseWeapon('P2', 12)">Pick from
+                weapon pile 5</button>
+            <button class="weaponButton btn-default btn-sm" type="button" onclick="chooseWeapon('P2', 20)">Pick from
+                weapon pile 6</button>
 
             <p id="displayWeaponValueP2">?</p>
             <br>
@@ -127,12 +158,18 @@
                 <p>Choose your attack</p>
                 <br>
 
-                <button type="button" onclick="atkFunction('P2', 4)">4 sided dice. 13-17 dmg</button>
-                <button type="button" onclick="atkFunction('P2', 6)">6 sided dice. 12-20 dmg</button>
-                <button type="button" onclick="atkFunction('P2', 8)">8 sided dice. 11-25 dmg</button>
-                <button type="button" onclick="atkFunction('P2', 10)">10 sided dice. 10-30 dmg</button>
-                <button type="button" onclick="atkFunction('P2', 12)">12 sided dice. 8-40 dmg</button>
-                <button type="button" onclick="atkFunction('P2', 20)">20 sided dice. 0-75 dmg</button>
+                <button class="atkButton btn-default btn-sm" type="button" onclick="atkFunction('P2', 4)">4 sided dice.
+                    13-17 dmg</button>
+                <button class="atkButton btn-default btn-sm" type="button" onclick="atkFunction('P2', 6)">6 sided dice.
+                    12-20 dmg</button>
+                <button class="atkButton btn-default btn-sm" type="button" onclick="atkFunction('P2', 8)">8 sided dice.
+                    11-25 dmg</button>
+                <button class="atkButton btn-default btn-sm" type="button" onclick="atkFunction('P2', 10)">10 sided
+                    dice. 10-30 dmg</button>
+                <button class="atkButton btn-default btn-sm" type="button" onclick="atkFunction('P2', 12)">12 sided
+                    dice. 8-40 dmg</button>
+                <button class="atkButton btn-default btn-sm" type="button" onclick="atkFunction('P2', 20)">20 sided
+                    dice. 0-75 dmg</button>
 
             </div>
             <p id="displayAttackP2">?</p>
@@ -140,8 +177,11 @@
 
             <h3 id="gameOverP2"></h3>
 
+            <h2 id="winCountP2"></h2>
+
         </div>
     </div>
+
 
     <!--
     <div class="row">
