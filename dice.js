@@ -1,15 +1,21 @@
 let playerOneObject = {
     startHP: 100,
     HP: 100,
+    percentHP: 100,
     Weapon: "tbd",
-    winCount: 0
+    Armor: "tbd",
+    winCount: 0,
+    turnCount: true
 };
 
 let playerTwoObject = {
     startHP: 100,
     HP: 100,
+    percentHP: 100,
     Weapon: "tbd",
-    winCount: 0
+    Armor: "tbd",
+    winCount: 0,
+    turnCount: false
 };
 
 function rollTheDice(diceSides) {
@@ -61,14 +67,13 @@ function hpInformation(player, armorResult) {
     if (player == "P1") {
         playerOneObject.startHP = 100 + armorResult;
         let playerOneCurrentHP = playerOneObject.startHP;
-        let playerOnePercentHP;
         if (playerOneCurrentHP < 100) {
-            playerOnePercentHP = (playerOneCurrentHP / playerOneObject.startHP) * 100;
-            document.getElementById("p1CurrentPercent").innerHTML = playerOnePercentHP + "%";
+            playerOneObject.percentHP = (playerOneCurrentHP / playerOneObject.startHP) * 100;
+            document.getElementById("p1CurrentPercent").innerHTML = playerOneObject.percentHP + "%";
         } else {
-            playerOnePercentHP = 100;
+            playerOneObject.percentHP = 100;
             //100 + %
-            document.getElementById("p1CurrentPercent").innerHTML = playerOnePercentHP + "%";
+            document.getElementById("p1CurrentPercent").innerHTML = playerOneObject.percentHP + "%";
         }
         document.getElementById("p1CurrentHP").innerHTML = playerOneCurrentHP + "/" + playerOneObject.startHP;
         playerOneObject.HP = playerOneObject.startHP
@@ -78,13 +83,12 @@ function hpInformation(player, armorResult) {
     if (player == "P2") {
         playerTwoObject.startHP = 100 + armorResult;
         let playerTwoCurrentHP = playerTwoObject.startHP;
-        let playerTwoPercentHP;
         if (playerTwoCurrentHP < 100) {
-            playerTwoPercentHP = (playerTwoCurrentHP / playerTwoObject.startHP) * 100;
-            document.getElementById("p2CurrentPercent").innerHTML = playerTwoPercentHP + "%";
+            playerTwoObject.percentHP = (playerTwoCurrentHP / playerTwoObject.startHP) * 100;
+            document.getElementById("p2CurrentPercent").innerHTML = playerTwoObject.percentHP + "%";
         } else {
-            playerTwoPercentHP = 100;
-            document.getElementById("p2CurrentPercent").innerHTML = playerTwoPercentHP + "%";
+            playerTwoObject.percentHP = 100;
+            document.getElementById("p2CurrentPercent").innerHTML = playerTwoObject.percentHP + "%";
         }
         document.getElementById("p2CurrentHP").innerHTML = playerTwoCurrentHP + "/" + playerTwoObject.startHP;
         playerTwoObject.HP = playerTwoObject.startHP;
@@ -187,35 +191,50 @@ function chooseWeapon(player, diceSides) {
 }
 
 function atkFunction(player, diceSides) {
-    let restartGame;
     let atkDamage;
 
-    if (player == "P1") {
-        atkDamage = playerOneObject.Weapon + rollTheDice(diceSides);
-        document.getElementById("displayAttackP1").innerHTML = "P1 dealt " + atkDamage + " damage to P2";
-        playerTwoObject.HP -= atkDamage;
-        document.getElementById("p2CurrentHP").innerHTML = playerTwoObject.HP + "/" + playerTwoObject.startHP;
-        if (playerTwoObject.HP < 1) {
-            playerOneObject.winCount += 1;
-            document.getElementById("winCountP1").innerHTML = "P1 has " + playerOneObject.winCount + " wins";
-            document.getElementById("gameOverP1").innerHTML = "P2 has been defeated, P1 wins!";
-            restartGame = prompt("Would you like to play again? Y or N");
-            resetGame();
+    if (playerOneObject.Weapon !== "tbd" && playerTwoObject.Weapon !== "tbd") {
+        if (player == "P1" && playerOneObject.turnCount) {
+            atkDamage = playerOneObject.Weapon + rollTheDice(diceSides);
+            document.getElementById("displayAttackP1").innerHTML = "P1 dealt " + atkDamage + " damage to P2";
+            playerTwoObject.HP -= atkDamage;
+            document.getElementById("p2CurrentHP").innerHTML = playerTwoObject.HP + "/" + playerTwoObject.startHP;
+            playerTwoObject.percentHP = Math.floor((playerTwoObject.HP / playerTwoObject.startHP) * 100);
+            document.getElementById("p2CurrentHP").style.width = playerTwoObject.percentHP + "%";
+            document.getElementById("p2CurrentPercent").innerHTML = playerTwoObject.percentHP + "%";
+            document.getElementById("p2CurrentPercent").style.width = playerTwoObject.percentHP + "%";
+            playerOneObject.turnCount = false;
+            playerTwoObject.turnCount = true;
+            if (playerTwoObject.HP < 1) {
+                playerOneObject.winCount += 1;
+                document.getElementById("winCountP1").innerHTML = "P1 has " + playerOneObject.winCount + " wins";
+                document.getElementById("gameOverP1").innerHTML = "P2 has been defeated, P1 wins!";
+                restartGame = prompt("Would you like to play again? Y or N");
+                resetGame();
+            }
+        } else if (player == "P2" && playerTwoObject.turnCount) {
+            atkDamage = playerTwoObject.Weapon + rollTheDice(diceSides);
+            document.getElementById("displayAttackP2").innerHTML = "P2 dealt " + atkDamage + " damage to P1";
+            playerOneObject.HP -= atkDamage;
+            document.getElementById("p1CurrentHP").innerHTML = playerOneObject.HP + "/" + playerOneObject.startHP;
+            playerOneObject.percentHP = Math.floor((playerOneObject.HP / playerOneObject.startHP) * 100);
+            document.getElementById("p1CurrentHP").style.width = playerOneObject.percentHP + "%";            
+            document.getElementById("p1CurrentPercent").innerHTML = playerOneObject.percentHP + "%";
+            document.getElementById("p1CurrentPercent").style.width = playerOneObject.percentHP + "%";
+            playerTwoObject.turnCount = false;
+            playerOneObject.turnCount = true;
+            if (playerOneObject.HP < 1) {
+                playerTwoObject.winCount += 1;
+                document.getElementById("winCountP2").innerHTML = "P2 has " + playerTwoObject.winCount + " wins";
+                document.getElementById("gameOverP2").innerHTML = "P1 has been defeated, P2 wins!";
+                restartGame = prompt("Would you like to play again? Y or N");
+                resetGame();
+            }
+        } else {
+            alert("It's not your turn!");
         }
-    }
-
-    if (player == "P2") {
-        atkDamage = playerTwoObject.Weapon + rollTheDice(diceSides);
-        document.getElementById("displayAttackP2").innerHTML = "P2 dealt " + atkDamage + " damage to P1";
-        playerOneObject.HP -= atkDamage;
-        document.getElementById("p1CurrentHP").innerHTML = playerOneObject.HP + "/" + playerOneObject.startHP;
-        if (playerOneObject.HP < 1) {
-            playerTwoObject.winCount += 1;
-            document.getElementById("winCountP2").innerHTML = "P2 has " + playerTwoObject.winCount + " wins";
-            document.getElementById("gameOverP2").innerHTML = "P1 has been defeated, P2 wins!";
-            restartGame = prompt("Would you like to play again? Y or N");
-            resetGame();
-        }
+    } else {
+        alert("Make sure you pick your armor and weapons.")
     }
 
 }
