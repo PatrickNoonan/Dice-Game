@@ -1,8 +1,31 @@
-.health-bar{    
-    width: 250px;
+html {
+    height: 100%;
+    width: 100%
+  }
+body {
+    max-height: 100%;
+    max-width: 100%;
+  }
+
+.adDisplay1 {    
+    background: rgb(212, 70, 27);
+    color: white;
+}
+
+.adDisplay2 {
+    background: rgb(212, 70, 27);
+    color: white;
+}
+
+.health-bar1{    
+    width: 500px;
     height: 40px;
-    border-radius: 20px;
-    margin: 0px 0px 0px 25%;
+    float: left;
+}
+.health-bar2{    
+    width: 500px;
+    height: 40px;
+    float: right;
 }
 
 .percentage{
@@ -13,4 +36,25 @@
     color: #333;
     font-weight: 700;
     text-align: center;
+}
+
+#infoButton {
+    position: absolute;
+    left: 0px;
+}
+
+.row {
+    margin: 0px 0px 0px 0px;
+}
+
+.fighter1 {
+    text-align: left;
+}
+
+.fighter2 {
+    text-align: right;
+}
+
+.menu-row {
+    bottom: 0px;
 }
