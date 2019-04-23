@@ -1,3 +1,18 @@
-.text-center {
-    text-align: center
+.health-bar{    
+    width: 250px;
+    height: 40px;
+    border-radius: 20px;
+    margin: 0px 0px 0px 25%;
+
+}
+
+.percentage{
+    width: 99%;
+    margin: 0 auto;
+    background: rgb(71, 179, 0);
+
+    color: #333;
+    font-weight: 700;
+    text-align: center;
+    border-radius: 15px;
 }
