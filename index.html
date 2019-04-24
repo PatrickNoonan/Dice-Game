@@ -42,9 +42,9 @@
             <br>
             <br>
             <br>
-            <div class="container">
+            <div class="container items-box">
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-6 armor-box">
                         <p>Choose your armor</p>
 
                         <button class="armorButton btn-default btn-sm" type="button" onclick="chooseArmor('P1', 4)">Pick
@@ -70,7 +70,7 @@
                         <p id="displayArmorValueP1">?</p>
                         <br>
                     </div>
-                    <div class="col-6">
+                    <div class="col-6 weapon-box">
 
                         <p>Choose your weapon</p>
                         <button class="weaponButton btn-default btn-sm" type="button"
@@ -132,9 +132,9 @@
             <br>
             <br>
             <br>
-            <div class="container">
+            <div class="container items-box">
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-6 armor-box">
                         <p>Choose your armor</p>
 
                         <button class="armorButton btn-default btn-sm" type="button" onclick="chooseArmor('P2', 4)">Pick
@@ -159,7 +159,7 @@
                         <p id="displayArmorValueP2">?</p>
                         <br>
                     </div>
-                    <div class="col-6">
+                    <div class="col-6 weapon-box">
 
                         <p>Choose your weapon</p>
 
@@ -190,57 +190,61 @@
 
         <div class="row stick-figues">
             <div class="col-6 stickOne">
-                    <img src="SFimage.png" alt="Stick Figure" height="200">
+                <img src="SFimage.png" alt="Stick Figure" height="200">
             </div>
             <div class="col-6 stickTwo">
-                    <img src="SFimage.png" alt="Stick Figure" height="200">
+                <img src="SFimage.png" alt="Stick Figure" height="200">
             </div>
         </div>
 
         <div class="row menu-row">
             <div class="col-6 menu-box">
-                <p>Choose your attack</p>
 
-                <button class="atkButton btn-default btn-sm" type="button" onclick="atkFunction('P1', 4)">4 sided dice.
+                <button class="atkButton btn-danger btn-sm" type="button" onclick="atkFunction('P1', 4)">4 sided
+                    dice.
                     14-17 dmg</button>
-                <button class="atkButton btn-default btn-sm" type="button" onclick="atkFunction('P1', 6)">6 sided dice.
+                <button class="atkButton btn-danger btn-sm" type="button" onclick="atkFunction('P1', 6)">6 sided
+                    dice.
                     12-22 dmg</button>
-                <button class="atkButton btn-default btn-sm" type="button" onclick="atkFunction('P1', 8)">8 sided dice.
+                <button class="atkButton btn-danger btn-sm" type="button" onclick="atkFunction('P1', 8)">8 sided
+                    dice.
                     11-26 dmg</button>
-                <button class="atkButton btn-default btn-sm" type="button" onclick="atkFunction('P1', 10)">10 sided
+                <button class="atkButton btn-danger btn-sm" type="button" onclick="atkFunction('P1', 10)">10 sided
                     dice. 10-29 dmg</button>
-                <button class="atkButton btn-default btn-sm" type="button" onclick="atkFunction('P1', 12)">12 sided
+                <button class="atkButton btn-danger btn-sm" type="button" onclick="atkFunction('P1', 12)">12 sided
                     dice. 6-32 dmg</button>
-                <button class="atkButton btn-default btn-sm" type="button" onclick="atkFunction('P1', 20)">20 sided
+                <button class="atkButton btn-danger btn-sm" type="button" onclick="atkFunction('P1', 20)">20 sided
                     dice. 0-36 dmg</button>
+                <button class="atkButton btn-success btn-sm" type="button" onclick="atkFunction('P1', 25)"> Medkit
+                     heal 20-30 HP </button>
                 <p id="displayAttackP1">?</p>
                 <h3 id="gameOverP1"></h3>
-                <h2 id="winCountP1"></h2>
+                <h3 id="winCountP1"></h3>
             </div>
-
             <div class="col-6 menu-box">
-                <p>Choose your attack</p>
 
-                <button class="atkButton btn-default btn-sm" type="button" onclick="atkFunction('P2', 4)">4 sided
+                <button class="atkButton btn-danger btn-sm" type="button" onclick="atkFunction('P2', 4)">4 sided
                     dice.
                     14-17 dmg</button>
-                <button class="atkButton btn-default btn-sm" type="button" onclick="atkFunction('P2', 6)">6 sided
+                <button class="atkButton btn-danger btn-sm" type="button" onclick="atkFunction('P2', 6)">6 sided
                     dice.
                     12-22 dmg</button>
-                <button class="atkButton btn-default btn-sm" type="button" onclick="atkFunction('P2', 8)">8 sided
+                <button class="atkButton btn-danger btn-sm" type="button" onclick="atkFunction('P2', 8)">8 sided
                     dice.
                     11-26 dmg</button>
-                <button class="atkButton btn-default btn-sm" type="button" onclick="atkFunction('P2', 10)">10 sided
+                <button class="atkButton btn-danger btn-sm" type="button" onclick="atkFunction('P2', 10)">10 sided
                     dice. 10-29 dmg</button>
-                <button class="atkButton btn-default btn-sm" type="button" onclick="atkFunction('P2', 12)">12 sided
+                <button class="atkButton btn-danger btn-sm" type="button" onclick="atkFunction('P2', 12)">12 sided
                     dice. 6-32 dmg</button>
-                <button class="atkButton btn-default btn-sm" type="button" onclick="atkFunction('P2', 20)">20 sided
+                <button class="atkButton btn-danger btn-sm" type="button" onclick="atkFunction('P2', 20)">20 sided
                     dice. 0-36 dmg</button>
+                <button class="atkButton btn-success btn-sm" type="button" onclick="atkFunction('P2', 25)"> Medkit
+                    heal 20-30 HP</button>
                 <p id="displayAttackP2">?</p>
                 <h3 id="gameOverP2"></h3>
-                <h2 id="winCountP2"></h2>
-            </div>        
-</div>
+                <h3 id="winCountP2"></h3>
+            </div>
+        </div>
 
 
         <!--

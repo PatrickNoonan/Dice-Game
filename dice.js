@@ -56,6 +56,10 @@ function rollTheDice(diceSides) {
             rollResult = Math.floor(Math.random() * (max - min)) + min;
             // CHANCE OF SELF HARM
             break;
+        case 25:
+            min = -20;
+            max = -30;
+            rollResult = Math.floor(Math.random() * (max - min)) + min;
     }
 
     return rollResult;
@@ -196,39 +200,63 @@ function atkFunction(player, diceSides) {
     if (playerOneObject.Weapon !== "tbd" && playerTwoObject.Weapon !== "tbd" && playerOneObject.Armor !== "tbd" && playerTwoObject.Armor !== "tbd") {
         if (player == "P1" && playerOneObject.turnCount) {
             atkDamage = playerOneObject.Weapon + rollTheDice(diceSides);
-            document.getElementById("displayAttackP1").innerHTML = "P1 dealt " + atkDamage + " damage to P2";
-            playerTwoObject.HP -= atkDamage;
-            document.getElementById("p2CurrentHP").innerHTML = playerTwoObject.HP + "/" + playerTwoObject.startHP;
-            playerTwoObject.percentHP = Math.floor((playerTwoObject.HP / playerTwoObject.startHP) * 100);
-            document.getElementById("p2CurrentHP").style.width = playerTwoObject.percentHP + "%";
-            document.getElementById("p2CurrentPercent").innerHTML = playerTwoObject.percentHP + "%";
-            document.getElementById("p2CurrentPercent").style.width = playerTwoObject.percentHP + "%";
-            playerOneObject.turnCount = false;
-            playerTwoObject.turnCount = true;
-            if (playerTwoObject.HP < 1) {
-                playerOneObject.winCount += 1;
-                document.getElementById("winCountP1").innerHTML = "P1 has " + playerOneObject.winCount + " wins";
-                document.getElementById("gameOverP1").innerHTML = "P2 has been defeated, P1 wins!";
-                restartGame = prompt("P1 has dealt a killing blow of " + atkDamage + " to P2!\nWould you like to play again? (Y or N)");
-                resetGame();
+            if (atkDamage < 0) {
+                document.getElementById("displayAttackP1").innerHTML = "Fighter 1 Healed for " + (atkDamage - (atkDamage * 2)) + " HP";
+                playerOneObject.HP -= atkDamage;
+                document.getElementById("p1CurrentHP").innerHTML = playerOneObject.HP + "/" + playerOneObject.startHP;
+                playerOneObject.percentHP = Math.floor((playerOneObject.HP / playerOneObject.startHP) * 100);
+                document.getElementById("p1CurrentHP").style.width = playerOneObject.percentHP + "%";
+                document.getElementById("p1CurrentPercent").innerHTML = playerOneObject.percentHP + "%";
+                document.getElementById("p1CurrentPercent").style.width = playerOneObject.percentHP + "%";
+                playerOneObject.turnCount = false;
+                playerTwoObject.turnCount = true;
+            } else {
+                document.getElementById("displayAttackP1").innerHTML = "Fighter 1 dealt " + atkDamage + " damage to Fighter 2";
+                playerTwoObject.HP -= atkDamage;
+                document.getElementById("p2CurrentHP").innerHTML = playerTwoObject.HP + "/" + playerTwoObject.startHP;
+                playerTwoObject.percentHP = Math.floor((playerTwoObject.HP / playerTwoObject.startHP) * 100);
+                document.getElementById("p2CurrentHP").style.width = playerTwoObject.percentHP + "%";
+                document.getElementById("p2CurrentPercent").innerHTML = playerTwoObject.percentHP + "%";
+                document.getElementById("p2CurrentPercent").style.width = playerTwoObject.percentHP + "%";
+                playerOneObject.turnCount = false;
+                playerTwoObject.turnCount = true;
+                if (playerTwoObject.HP < 1) {
+                    playerOneObject.winCount += 1;
+                    document.getElementById("winCountP1").innerHTML = "Fighter 1 has " + playerOneObject.winCount + " wins";
+                    document.getElementById("gameOverP1").innerHTML = "Fighter 2 has been defeated, Figher 1 wins!";
+                    restartGame = prompt("Fighter 1 has dealt a killing blow of " + atkDamage + " to Fighter 2!\nWould you like to play again? (Y or N)");
+                    resetGame();
+                }
             }
         } else if (player == "P2" && playerTwoObject.turnCount) {
             atkDamage = playerTwoObject.Weapon + rollTheDice(diceSides);
-            document.getElementById("displayAttackP2").innerHTML = "P2 dealt " + atkDamage + " damage to P1";
-            playerOneObject.HP -= atkDamage;
-            document.getElementById("p1CurrentHP").innerHTML = playerOneObject.HP + "/" + playerOneObject.startHP;
-            playerOneObject.percentHP = Math.floor((playerOneObject.HP / playerOneObject.startHP) * 100);
-            document.getElementById("p1CurrentHP").style.width = playerOneObject.percentHP + "%";            
-            document.getElementById("p1CurrentPercent").innerHTML = playerOneObject.percentHP + "%";
-            document.getElementById("p1CurrentPercent").style.width = playerOneObject.percentHP + "%";
-            playerTwoObject.turnCount = false;
-            playerOneObject.turnCount = true;
-            if (playerOneObject.HP < 1) {
-                playerTwoObject.winCount += 1;
-                document.getElementById("winCountP2").innerHTML = "P2 has " + playerTwoObject.winCount + " wins";
-                document.getElementById("gameOverP2").innerHTML = "P1 has been defeated, P2 wins!";
-                restartGame = prompt("P2 has dealt a killing blow of " + atkDamage + " to P1!\nWould you like to play again? (Y or N)");
-                resetGame();
+            if (atkDamage < 0) {
+                document.getElementById("displayAttackP2").innerHTML = "Fighter 2 Healed for " + (atkDamage - (atkDamage * 2)) + " HP";
+                playerTwoObject.HP -= atkDamage;
+                document.getElementById("p2CurrentHP").innerHTML = playerTwoObject.HP + "/" + playerTwoObject.startHP;
+                playerTwoObject.percentHP = Math.floor((playerTwoObject.HP / playerTwoObject.startHP) * 100);
+                document.getElementById("p2CurrentHP").style.width = playerTwoObject.percentHP + "%";
+                document.getElementById("p2CurrentPercent").innerHTML = playerTwoObject.percentHP + "%";
+                document.getElementById("p2CurrentPercent").style.width = playerTwoObject.percentHP + "%";
+                playerTwoObject.turnCount = false;
+                playerOneObject.turnCount = true;
+            } else {
+                document.getElementById("displayAttackP2").innerHTML = "Fighter 2 dealt " + atkDamage + " damage to Fighter 1";
+                playerOneObject.HP -= atkDamage;
+                document.getElementById("p1CurrentHP").innerHTML = playerOneObject.HP + "/" + playerOneObject.startHP;
+                playerOneObject.percentHP = Math.floor((playerOneObject.HP / playerOneObject.startHP) * 100);
+                document.getElementById("p1CurrentHP").style.width = playerOneObject.percentHP + "%";
+                document.getElementById("p1CurrentPercent").innerHTML = playerOneObject.percentHP + "%";
+                document.getElementById("p1CurrentPercent").style.width = playerOneObject.percentHP + "%";
+                playerTwoObject.turnCount = false;
+                playerOneObject.turnCount = true;
+                if (playerOneObject.HP < 1) {
+                    playerTwoObject.winCount += 1;
+                    document.getElementById("winCountP2").innerHTML = "Fighter 2 has " + playerTwoObject.winCount + " wins";
+                    document.getElementById("gameOverP2").innerHTML = "Fighter 1 has been defeated, Fighter 2 wins!";
+                    restartGame = prompt("Fighter 2 has dealt a killing blow of " + atkDamage + " to Fighter 1!\nWould you like to play again? (Y or N)");
+                    resetGame();
+                }
             }
         } else {
             alert("It's not your turn!");
@@ -249,7 +277,7 @@ function resetGame() {
     playerTwoObject.HP = 100;
     playerTwoObject.Weapon = 0;
     playerTwoObject.percentHP = 100;
-    
+
     document.getElementById("p1CurrentHP").style.width = playerOneObject.percentHP + "%";
     document.getElementById("p1CurrentPercent").style.width = playerOneObject.percentHP + "%";
     document.getElementById("p2CurrentHP").style.width = playerTwoObject.percentHP + "%";
